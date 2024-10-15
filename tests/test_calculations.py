@@ -4,7 +4,6 @@ import pytest
 from calculator.calculation import Calculation
 from calculator.calculations import Calculations
 
-# Import arithmetic operation functions (add and subtract) to be tested.
 from calculator.operations import add, subtract
 
 @pytest.fixture
