@@ -27,5 +27,6 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     with pytest.raises(SystemExit) as excinfo:
         app.start()
     
+    
     captured = capfd.readouterr()
     assert "No such command: unknown_command" in captured.out
