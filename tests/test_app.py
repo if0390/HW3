@@ -1,5 +1,13 @@
 import pytest
+
 from app import App
+
+def test_app_get_environment_variable():
+    app = App()
+    current_env = app.get_environment_variable('ENVIRONMENT')
+    assert current_env in ['DEVELOPMENT', 'TESTING', 'PRODUCTION'], f"Invalid ENVIRONMENT: {current_env}"
+
+
 
 def test_app_start_exit_command(capfd, monkeypatch):
     """Test that the REPL exits correctly on 'exit' command."""
@@ -8,10 +16,6 @@ def test_app_start_exit_command(capfd, monkeypatch):
     with pytest.raises(SystemExit) as e:
         app.start()
     assert e.type == SystemExit
-
-
-
-import pytest
 
 def test_app_start_unknown_command(capfd, monkeypatch):
     """Test how the REPL handles an unknown command before exiting."""
@@ -22,6 +26,6 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     
     with pytest.raises(SystemExit) as excinfo:
         app.start()
-        
+    
     captured = capfd.readouterr()
     assert "No such command: unknown_command" in captured.out
